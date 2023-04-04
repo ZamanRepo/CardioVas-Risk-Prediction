@@ -9,7 +9,12 @@
 </details>
 
 ## Libraries Used
+For handling and manipulating data
 
+<a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-black?style=flat-square&logo=Pandas&logoColor=white&link=https://pandas.pydata.org" alt="Pandas" width="80" height="25"></a>
+<a href="https://numpy.org/" target="_blank"><img src="https://img.shields.io/badge/Numpy-4d77cf?style=flat-square&logo=Numpy&logoColor=white&link=https://numpy.org/" alt="Numpy" width="80" height="25"></a>
+
+For Visualisation
 <div align = "right">    
   <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
 </div>
