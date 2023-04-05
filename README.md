@@ -7,10 +7,10 @@
 2. [Dataset Description](#dataset-description)
 3. [Hypothesis Testing](#hypothesis-testing)
 4. [Feature Engineering and Data Pre-processing](#feature-engineering-and-data-pre-processing)
-    + Handling Missing values
-    + Feature Manipulation
-    + Handling outliers
-    + Splitting, Balancing and Scaling
+    + [Handling Missing values](#handling-missing-values)
+    + [Feature Manipulation](#feature-manipulation)
+    + [Handling outliers](#handling-outliers)
+    + [Data Splitting, Balancing and Scaling](#data-splitting-balancing-and-scaling)
 9. [Libraries Used](#libraries-used)
 10. [Contact](#contact)
 </details>
@@ -28,7 +28,7 @@ The objective of this project is to develop a classification model to predict th
 
 ## Dataset Description
 
-The Framingham dataset consists of medical, behavioural and demographic data on 3390 residents from the town of Framingham, Massachussets. Each of the feature is considered a possible factor for prediction of a Coronary Heart Disease in the next 10 years. The following are the features for a particular resident:
+The Framingham dataset consists of medical, behavioural and demographic data on 3390 residents from the town of Framingham, Massachussets. Each one of the features are considered a possible factor for prediction of a Coronary Heart Disease in the next 10 years. The following are the features for a particular resident:
 *   **id**: Personal identification number (Unique)
 
 Demographic:
@@ -74,6 +74,14 @@ The tests were performed using the **one-sample proportion test**, **one-sample 
 
 ## Feature Engineering and Data Pre-processing
 
+### Handling missing values
+
+### Feature Manipulation
+
+### Handling outliers
+
+### Data Splitting, Balancing and Scaling
+
 <div align = "right">    
   <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
 </div>
@@ -81,8 +89,8 @@ The tests were performed using the **one-sample proportion test**, **one-sample 
 ## Libraries Used
 For handling and manipulating data
 
-<a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-black?style=flat-square&logo=Pandas&logoColor=white&link=https://pandas.pydata.org" alt="Pandas" width="80" height="25"></a>
-<a href="https://numpy.org/" target="_blank"><img src="https://img.shields.io/badge/NumPy-4d77cf?style=flat-square&logo=Numpy&logoColor=white&link=https://numpy.org/" alt="Numpy" width="80" height="25"></a>
+<a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-black?style=flat-square&logo=Pandas&logoColor=white&link=https://pandas.pydata.org" alt="Pandas" width="84" height="25"></a>
+<a href="https://numpy.org/" target="_blank"><img src="https://img.shields.io/badge/NumPy-4d77cf?style=flat-square&logo=Numpy&logoColor=white&link=https://numpy.org/" alt="Numpy" width="84" height="25"></a>
 
 For Visualisation
 
