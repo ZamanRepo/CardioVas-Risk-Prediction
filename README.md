@@ -10,7 +10,10 @@
     + [Handling Missing values](#handling-missing-values)
     + [Feature Manipulation](#feature-manipulation)
     + [Handling outliers](#handling-outliers)
+    + [Iterations](#iterations)
     + [Data Splitting, Balancing and Scaling](#data-splitting-balancing-and-scaling)
+5. [Model Implementation](#model-implementation)
+6. [Model Evaluation](#model-evaluation)
 9. [Libraries Used](#libraries-used)
 10. [Contact](#contact)
 </details>
@@ -74,13 +77,60 @@ The tests were performed using the **one-sample proportion test**, **one-sample 
 
 ## Feature Engineering and Data Pre-processing
 
+Before model implementation, the data is made to go through a set of pre-processing methods. Five different datasets were generated from this, based on the different methods of pre-processing - one main dataset and four other iterations to check the sensitivity of model prediction power with respect to method of pre-processing.
+
 ### Handling missing values
+
+Missing values were imputed realistically for minimal amount of bias into the dataset. For example, among the missing values in **BPMeds** which is a binary feature, only those were imputed with 1 (indicating they take medications) who have a more than optimum systolic or diastolic blood pressure level, the optimum level being defined on the basis of diabetes according to the [NCBI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2560868/#:~:text=For%20most%20people%2C%20blood%20pressure%20readings%20should%20be,80%20mmHg%20when%20measured%20in%20the%20doctor%E2%80%99s%20office.)
 
 ### Feature Manipulation
 
+To reduce dimensionality and/or improve multicollinearity within the dataset, certain features are deemed redundant and some are combined/transformed to create new features, to form a final set of features on which rest of the analysis is performed. The final set of features chosen in this dataset were - **age, cigsPerDay, BPMeds, totChol, BMI, heartRate, MAP,** and **diabetes_grade**.
+
+*   **Mean Arterial Pressure** was created combining the systolic and diastolic blood pressures
+*   **glucose** levels were categorised to create diabetes_grade with four classes, to handle the extreme outliers in the feature
+*   **education, is_smoking, prevalentStroke, prevalentHyp,** and **diabetes** were deemed redundant after thorough analysis of the features
+
 ### Handling outliers
 
+While all of the data was in the range of possible and realistic values for each feature, some datapoints indicated extremely rare cases which are also medical emergencies. These "outliers" could hamper the model prediction power. Hence, to avoid loss of data, outliers were limitted to maximum and minimum values, through **Winsorising**.
+
+### Iterations
+
+The many hypotheses in all the above pre-processing steps were also tested by creating new datasets whenever an assumption is made. All-in-all, four new datasets were created, and each was considered an iteration to be finally compared with the original dataset. The iterations were:
+1. Dropping all data with missing values
+2. Using KNN Imputer for imputing the missing values of **glucose**
+3. Using Regression Imputer for imputing the missing values of **glucose**
+4. Trimming of the outliers instead of Winsorising
+
 ### Data Splitting, Balancing and Scaling
+
+After all the above feature engineering, the dataset was split into train and test sets. A 80-20 split ratio was chosen since the total amount of data is less and more training data is provided to the models to learn from
+
+Since the classes in the variable to be predicted were heavily imbalanced, SMOTE was used to balance the classes. Undersampling and Random Oversampling were avoided to prevent loss of data and overfitting of the models respectively
+
+Finally, the datasets were scaled using the MinMaxScaler fitted to the training set.
+
+<div align = "right">    
+  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
+</div>
+
+## Model Implementation
+
+Seven models were implemented on the scaled data. GridSearchCV was performed to tune the hyperparameters. RepeatedStratifiedKFold was used for Cross Validation. The models were:
+1. Logistic Regression
+2. Naive Bayes
+3. Decision Tree
+4. K-Nearest Neighbours
+5. Support Vector Machine
+6. Random Forest
+7. XGBoost
+
+<div align = "right">    
+  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
+</div>
+
+## Model Evaluation
 
 <div align = "right">    
   <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
