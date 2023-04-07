@@ -5,15 +5,17 @@
 
 1. [About the Project](#about-the-project)
 2. [Dataset Description](#dataset-description)
-3. [Hypothesis Testing](#hypothesis-testing)
-4. [Feature Engineering and Data Pre-processing](#feature-engineering-and-data-pre-processing)
+3. [Feature Engineering and Data Pre-processing](#feature-engineering-and-data-pre-processing)
     + [Handling Missing values](#handling-missing-values)
     + [Feature Manipulation](#feature-manipulation)
     + [Handling outliers](#handling-outliers)
     + [Iterations](#iterations)
     + [Data Splitting, Balancing and Scaling](#data-splitting-balancing-and-scaling)
-5. [Model Implementation](#model-implementation)
-6. [Model Evaluation](#model-evaluation)
+4. [Model Implementation](#model-implementation)
+5. [Model Evaluation](#model-evaluation)
+6. [Results](#results)
+7. [Conclusion](#conclusion)
+8. [Challenges Faced](#challenges-faced)
 9. [Libraries Used](#libraries-used)
 10. [Contact](#contact)
 </details>
@@ -62,19 +64,6 @@ Target variable to predict:
   <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
 </div>
 
-## Hypothesis Testing
-
-Three hypothetical statements were tested on this dataset to better understand the sample space and the population, and to discern the relationship between the categorical variables. They were:
-1. 50% of men and 44% of women have more than the optimum Blood Pressure values
-2. The mean systolic and diastolic Blood Pressures are the optimum values of 130/80 mmHg respectively
-3. The categorical variables which are factors for risk prediction, are not dependent on the variable to be predicted
-
-The tests were performed using the **one-sample proportion test**, **one-sample t-test** and **two-sample chi-squared test** respectively. The **Shapiro test** was also utilised for the final statement
-
-<div align = "right">    
-  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
-</div>
-
 ## Feature Engineering and Data Pre-processing
 
 Before model implementation, the data is made to go through a set of pre-processing methods. Five different datasets were generated from this, based on the different methods of pre-processing - one main dataset and four other iterations to check the sensitivity of model prediction power with respect to method of pre-processing.
@@ -85,7 +74,7 @@ Missing values were imputed realistically for minimal amount of bias into the da
 
 ### Feature Manipulation
 
-To reduce dimensionality and/or improve multicollinearity within the dataset, certain features are deemed redundant and some are combined/transformed to create new features, to form a final set of features on which rest of the analysis is performed. The final set of features chosen in this dataset were - **age, cigsPerDay, BPMeds, totChol, BMI, heartRate, MAP,** and **diabetes_grade**.
+To reduce dimensionality and/or improve multicollinearity within the dataset, certain features are deemed redundant and some are combined/transformed to create new features, to form a final set of features on which rest of the analysis is performed. The two-sample chi-squared hypothesis test was performed on the categorical variables to conclude the redundant features due to low dependance with the feature to be predicted. The final set of features chosen in this dataset were - **age, cigsPerDay, BPMeds, totChol, BMI, heartRate, MAP,** and **diabetes_grade**.
 
 *   **Mean Arterial Pressure** was created combining the systolic and diastolic blood pressures
 *   **glucose** levels were categorised to create diabetes_grade with four classes, to handle the extreme outliers in the feature
@@ -132,11 +121,54 @@ Seven models were implemented on the scaled data. GridSearchCV was performed to 
 
 ## Model Evaluation
 
+The Recall Score was chosen as the evaluation metric for comparison between models. In the context of cardiovascular risk prediction, it is important to identify individuals who are at high risk so that appropriate interventions can be taken to prevent or manage their risk. False negatives (i.e., individuals who are at high risk but are not correctly identified as such) can lead to missed opportunities for prevention or treatment, and may result in adverse health outcomes. Therefore, a high recall rate is desirable in cardiovascular risk prediction models.
+
+<div align = "right">    
+  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
+</div>
+
+## Results
+
+The results for the original dataset were:
+
+| Model | Train Recall (%) | Test Recall (%)     |
+| :--- |    :----:   |          :---: |
+| Logistic Regression | 66.999       | 69.607   |
+| Naive Bayes   | 51.584 | 52.941 |
+| Decision Tree | 90.187 | 87.255   |
+| KNN | 80.373 | 71.568 |
+| SVM | 70.777 | 73.529 |
+| Random Forest | 78.983 | 67.647 |
+| XGBoost | 80.199 | 77.451   |
+
+On the basis of comparison of Test Recalls, the Decision Tree model performed the best for the original dataset. For each iteration, the maximum Test Recalls were lesser than this value, so the original dataset was chosen as the best pre-processing method for this project, and the Decision Tree as the best performing model.
+
+The predictions from this model were explained, both locally (for each data point) and globally using SHaply Additive exPlanations (SHAP).
+
+<div align = "right">    
+  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
+</div>
+
+## Conclusion
+
+Overall, the Decision Tree proved to be the most productive model for prediction of cardiovascular risk than the other models in this context. This project demonstrates the importance of data preprocessing, feature engineering, and model selection in developing a successful classification model for cardiovascular risk prediction.
+
+<div align = "right">    
+  <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
+</div>
+
+## Challenges Faced
+
+*   The primary challenge in this project was right at the onset - to understand the context of the problem, the features, and how they all relate to a risk of heart disease. Understanding the features like Blood Pressure, Diabetes, Cholestrol, BMI etc and their correlation required discussions with those in the medical profession.
+*   Understanding the context helped overcome the second challenge of handling missing values and the outliers. The missing values need to be imputed realistically, while the outliers need to be analysed whether they are in the possible range of values for that feature. Several methods and combinations were tried, to arrive at an optimum set of methodologies.
+*   The final challenge was for tuning the parameters for model implementation. Since models like Random Forest take a long time to train, an ideal set of parameter values need to be arrived at to tune them to achieve maximum Recall.
+
 <div align = "right">    
   <a href="#framingham-cardiovascular-risk-prediction">(back to top)</a>
 </div>
 
 ## Libraries Used
+
 For handling and manipulating data
 
 <a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-black?style=flat-square&logo=Pandas&logoColor=white&link=https://pandas.pydata.org" alt="Pandas" width="84" height="25"></a>
