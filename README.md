@@ -1,5 +1,10 @@
 # Framingham Cardiovascular Risk Prediction
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/115869753/230662477-fc6681bc-a25c-45ad-a1fd-961d32262955.png" alt="Example Image" width="500" height="500">
+</p>
+
+
 <details>
 <summary>Table of Contents</summary>
 
